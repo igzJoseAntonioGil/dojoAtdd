@@ -1,26 +1,26 @@
 'use strict';
 
-const restify = require('restify'),
-    q = require('q');
+const restify = require('restify');
+const q = require('q');
 
 module.exports = {
-    create: create,
-    start: start
+  create: create,
+  start: start,
 };
 
 function create() {
-    const server = restify.createServer({
-        name: 'checkout'
-    });
+  const server = restify.createServer({
+    name: 'checkout',
+  });
 
-    server.use(restify.queryParser());
-    server.use(restify.bodyParser());
+  server.use(restify.queryParser());
+  server.use(restify.bodyParser());
 
-    return server;
+  return server;
 }
 
 function start(server, port) {
-    const deferred = q.defer();
-    server.listen(port, () => deferred.resolve());
-    return deferred.promise;
+  const deferred = q.defer();
+  server.listen(port, () => deferred.resolve());
+  return deferred.promise;
 }
